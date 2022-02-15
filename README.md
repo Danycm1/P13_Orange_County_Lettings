@@ -18,11 +18,11 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 #### Cloner le repository
 
 - `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+- `git clone https://github.com/Danycm1/P13_Orange_county_lettings.git`
 
 #### Créer l'environnement virtuel
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd /path/to/P13_Orange_county_lettings`
 - `python -m venv venv`
 - `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
 - Activer l'environnement `source venv/bin/activate`
@@ -43,7 +43,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 #### Linting
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd /path/to/P13_Orange_county_lettings`
 - `source venv/bin/activate`
 - `flake8`
 
@@ -59,9 +59,8 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - Ouvrir une session shell `sqlite3`
 - Se connecter à la base de données `.open oc-lettings-site.sqlite3`
 - Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
-- Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
+- Afficher les colonnes dans le tableau des profils, `pragma table_info(profiles_profile);`
+- Lancer une requête sur la table des profils, `select user_id, favorite_city from profiles_profile  where favorite_city like 'B%';`
 - `.quit` pour quitter
 
 #### Panel d'administration
@@ -75,3 +74,27 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+### Déploiement
+
+A chaque mise à jours de la branche "master", CircleCI récupère le code et va lancer des tests unitaire et pelucher le code pour s'assurer qu'on respecte le PEP8.
+
+#### Prérequis
+
+- [Compte CircleCI](https://circleci.com/signup/)
+- [Compte Dockerhub](https://hub.docker.com/)
+- [Compte Heroku](https://signup.heroku.com/)
+- [Installer Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-python#set-up)
+
+#### Installation
+Suivez le dépôt Github dans CircleCI et ensuite aller dans les variables d'environnements et y ajouter :
+
+`DOCKER_HUB_PASSWORD` <- Mot de passe de votre compte Docker
+
+`DOCKER_HUB_USER` <- Nom d'utilisateur votre compte Docker
+
+`HEROKU_APP_NAME` <- Nom de l'application Heroku
+
+`HEROKU_API_KEY` <- Clé API de votre compte Heroku
+
+Acceder à votre site Heroku cmomme ceci : https://nom-de-l'application.herokuapp.com/
