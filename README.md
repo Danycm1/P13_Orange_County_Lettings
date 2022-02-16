@@ -84,6 +84,7 @@ A chaque mise à jours de la branche "master", CircleCI récupère le code et va
 - [Compte CircleCI](https://circleci.com/signup/)
 - [Compte Dockerhub](https://hub.docker.com/)
 - [Compte Heroku](https://signup.heroku.com/)
+- [Compte Sentry](https://sentry.io/signup/)
 - [Installer Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-python#set-up)
 
 #### Installation
@@ -96,5 +97,7 @@ Suivez le dépôt Github dans CircleCI et ensuite aller dans les variables d'env
 `HEROKU_APP_NAME` <- Nom de l'application Heroku
 
 `HEROKU_API_KEY` <- Clé API de votre compte Heroku
+
+`SENTRY_AUTH_TOKEN ` <- Token interne d'intégration Sentry
 
 Acceder à votre site Heroku cmomme ceci : https://nom-de-l'application.herokuapp.com/
