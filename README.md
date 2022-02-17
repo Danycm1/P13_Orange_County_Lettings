@@ -100,4 +100,6 @@ Suivez le dépôt Github dans CircleCI et ensuite aller dans les variables d'env
 
 `SENTRY_AUTH_TOKEN ` <- Token interne d'intégration Sentry
 
-Acceder à votre site Heroku cmomme ceci : https://nom-de-l'application.herokuapp.com/
+Créer un projet sur Sentry et naviguer dans paramètres -> nomduprojet -> paramètres de développeur -> copier le token et l'ajouter dans CircleCI
+
+Accéder à votre site Heroku comme ceci : https://nom-de-l'application.herokuapp.com/
