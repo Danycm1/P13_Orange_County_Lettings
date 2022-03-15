@@ -43,13 +43,6 @@ jobs:
             docker build -t $DOCKER_HUB_USER/p13orangecountylettings:$CIRCLE_SHA1 .
             echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USER --password-stdin
             docker push $DOCKER_HUB_USER/p13orangecountylettings:$CIRCLE_SHA1
-      - run:
-          name: Start container and push to Heroku
-          command: |
-            sudo curl https://cli-assets.heroku.com/install.sh | sh
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
   
   deploy-heroku:
     docker:
@@ -61,8 +54,6 @@ jobs:
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} -a $HEROKU_APP_NAME
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set SENTRY_KEY=${SENTRY_KEY} -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
          
