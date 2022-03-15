@@ -31,7 +31,7 @@ jobs:
       - store_artifacts:
           path: test-results
 
-  deploy:
+  deploy-docker:
     docker:
       - image: cimg/python:3.10.2
     steps:
@@ -50,6 +50,21 @@ jobs:
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
+  
+  deploy-heroku:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - run:
+          name: Start container and push to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set SENTRY_KEY=${SENTRY_KEY} -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
          
 
 # Invoke jobs via workflows
@@ -58,10 +73,17 @@ workflows:
   P13_lettings:
     jobs:
     - build-and-test
-    - deploy:
+    - deploy-docker:
         requires:
           - build-and-test
         filters:
           branches:
             only:
               - master
+    - deploy-heroku:
+          requires:
+            - deploy-docker
+          filters:
+            branches:
+              only:
+                - master
