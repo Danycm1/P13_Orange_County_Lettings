@@ -31,6 +31,7 @@ tomli = "==2.0.1"
 urllib3 = "==1.26.8"
 whitenoise = "==6.0.0"
 python-decouple = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
