@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "27f9a675ad825bf398d0b1c8c39932302ba10b6871290a98cb29abe2b5d832f7"
+            "sha256": "b96928006f4cc4c663b7c4678575c3cd0e1f06e6bdc883686e7741f282da364a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -55,13 +55,6 @@
             ],
             "index": "pypi",
             "version": "==0.4.4"
-        },
-        "decouple": {
-            "hashes": [
-                "sha256:c253c1cc62b76e9720a066f334552548c6de1884bc3bdf456ddb62d61b867b09"
-            ],
-            "index": "pypi",
-            "version": "==0.0.7"
         },
         "dj-database-url": {
             "hashes": [
@@ -244,6 +237,14 @@
             ],
             "index": "pypi",
             "version": "==3.9.0"
+        },
+        "python-decouple": {
+            "hashes": [
+                "sha256:2838cdf77a5cf127d7e8b339ce14c25bceb3af3e674e039d4901ba16359968c7",
+                "sha256:6cf502dc963a5c642ea5ead069847df3d916a6420cad5599185de6bab11d8c2e"
+            ],
+            "index": "pypi",
+            "version": "==3.6"
         },
         "pytz": {
             "hashes": [
