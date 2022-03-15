@@ -2,7 +2,6 @@ import os
 import django_on_heroku
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
-from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -12,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -117,7 +116,7 @@ STATIC_URL = '/static/'
 django_on_heroku.settings(locals(), test_runner=False)
 
 sentry_sdk.init(
-    dsn=config('SENTRY_KEY'),
+    dsn=os.environ.get('SENTRY_KEY'),
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
